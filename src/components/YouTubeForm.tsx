@@ -62,6 +62,7 @@ const YouTubeForm = () => {
     watch,
     getValues,
     setValue,
+    reset,
   } = form;
   const {
     errors,
@@ -72,7 +73,7 @@ const YouTubeForm = () => {
     isSubmitting,
     isSubmitted,
     isSubmitSuccessful,
-    submitCount
+    submitCount,
   } = formState;
 
   console.log({ isSubmitting, isSubmitted, isSubmitSuccessful, submitCount });
@@ -108,6 +109,12 @@ const YouTubeForm = () => {
       shouldValidate: true,
     });
   };
+
+  useEffect(() => {
+    if (isSubmitSuccessful) {
+      reset();
+    }
+  }, [isSubmitSuccessful, reset]);
 
   // watch with useEffect
   // useEffect(() => {
@@ -335,6 +342,14 @@ const YouTubeForm = () => {
 
         <button type="submit" disabled={!isDirty || !isValid || isSubmitting}>
           Submit
+        </button>
+        <button
+          type="button"
+          onClick={() => {
+            reset();
+          }}
+        >
+          Reset
         </button>
         <button type="button" onClick={handleGetValues}>
           Get values
