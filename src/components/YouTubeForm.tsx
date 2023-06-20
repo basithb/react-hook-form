@@ -5,6 +5,11 @@ type FormValues = {
   username: string;
   email: string;
   channel: string;
+  social: {
+    // here, we are storing separate key-value pairs inside of one object itself
+    twitter: string;
+    facebook: string;
+  };
 };
 
 let renderCount = 0;
@@ -16,6 +21,10 @@ const YouTubeForm = () => {
       username: "Batman",
       email: "",
       channel: "",
+      social: {
+        twitter: "",
+        facebook: "",
+      },
     },
 
     // defaultValues: async () => {
@@ -111,6 +120,24 @@ const YouTubeForm = () => {
           ></input>
 
           <p className="error">{errors.channel?.message}</p>
+        </div>
+
+        <div className="form-control">
+          <label htmlFor="twitter">Twitter</label>
+          <input
+            type="text"
+            id="twitter"
+            {...register("social.twitter")}
+          ></input>
+        </div>
+
+        <div className="form-control">
+          <label htmlFor="facebook">Facebook</label>
+          <input
+            type="text"
+            id="facebook"
+            {...register("social.facebook")}
+          ></input>
         </div>
 
         <button type="submit">Submit</button>
