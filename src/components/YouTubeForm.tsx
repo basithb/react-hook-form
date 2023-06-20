@@ -63,9 +63,9 @@ const YouTubeForm = () => {
     getValues,
     setValue,
   } = form;
-  const { errors, touchedFields, dirtyFields, isDirty } = formState;
+  const { errors, touchedFields, dirtyFields, isDirty, isValid } = formState;
 
-  console.log({ touchedFields, dirtyFields, isDirty });
+  console.log({ touchedFields, dirtyFields, isDirty, isValid });
 
   const { fields, append, remove } = useFieldArray({
     name: "phNumbers",
@@ -143,7 +143,8 @@ const YouTubeForm = () => {
               },
               pattern: {
                 value:
-                  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+                  // /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+                  /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
                 message: "Invalid email format",
               },
               validate: {
@@ -320,7 +321,9 @@ const YouTubeForm = () => {
           <p className="error">{errors.dob?.message}</p>
         </div>
 
-        <button type="submit">Submit</button>
+        <button type="submit" disabled={!isDirty || !isValid}>
+          Submit
+        </button>
         <button type="button" onClick={handleGetValues}>
           Get values
         </button>
