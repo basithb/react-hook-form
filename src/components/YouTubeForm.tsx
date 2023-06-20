@@ -60,7 +60,7 @@ const YouTubeForm = () => {
   } = form;
   const { errors, touchedFields, dirtyFields, isDirty } = formState;
 
-  console.log({touchedFields, dirtyFields, isDirty});
+  console.log({ touchedFields, dirtyFields, isDirty });
 
   const { fields, append, remove } = useFieldArray({
     name: "phNumbers",
@@ -185,6 +185,10 @@ const YouTubeForm = () => {
                 value: true,
                 message: "Twitter ID is required!",
               },
+              // disabled: true,
+
+              // conditionally disable the field
+              disabled: watch("channel") === "",
             })}
           ></input>
 
