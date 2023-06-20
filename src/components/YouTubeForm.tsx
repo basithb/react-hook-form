@@ -49,7 +49,15 @@ const YouTubeForm = () => {
     //   };
     // },
   });
-  const { register, control, handleSubmit, formState, watch, getValues } = form;
+  const {
+    register,
+    control,
+    handleSubmit,
+    formState,
+    watch,
+    getValues,
+    setValue,
+  } = form;
   const { errors } = formState;
 
   const { fields, append, remove } = useFieldArray({
@@ -67,6 +75,15 @@ const YouTubeForm = () => {
 
     // get specific values
     console.log("Get values", getValues(["username", "channel"]));
+  };
+
+  const handleSetValue = () => {
+    // setValue("username", "")
+    setValue("username", "", {
+      shouldTouch: true,
+      shouldDirty: true,
+      shouldValidate: true,
+    });
   };
 
   // watch with useEffect
@@ -291,6 +308,9 @@ const YouTubeForm = () => {
         <button type="submit">Submit</button>
         <button type="button" onClick={handleGetValues}>
           Get values
+        </button>
+        <button type="button" onClick={handleSetValue}>
+          Set value
         </button>
       </form>
       <DevTool control={control} />
