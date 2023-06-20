@@ -10,6 +10,7 @@ type FormValues = {
     twitter: string;
     facebook: string;
   };
+  phoneNumbers: string[];
 };
 
 let renderCount = 0;
@@ -25,6 +26,7 @@ const YouTubeForm = () => {
         twitter: "",
         facebook: "",
       },
+      phoneNumbers: ["", ""],
     },
 
     // defaultValues: async () => {
@@ -127,8 +129,15 @@ const YouTubeForm = () => {
           <input
             type="text"
             id="twitter"
-            {...register("social.twitter")}
+            {...register("social.twitter", {
+              required: {
+                value: true,
+                message: "Twitter ID is required!",
+              },
+            })}
           ></input>
+
+          <p className="error">{errors.social?.twitter?.message}</p>
         </div>
 
         <div className="form-control">
@@ -136,8 +145,47 @@ const YouTubeForm = () => {
           <input
             type="text"
             id="facebook"
-            {...register("social.facebook")}
+            {...register("social.facebook", {
+              required: {
+                value: true,
+                message: "Facebook ID is required",
+              },
+            })}
           ></input>
+
+          <p className="error">{errors.social?.facebook?.message}</p>
+        </div>
+
+        <div className="form-control">
+          <label htmlFor="primary-phone">Primary phone number</label>
+          <input
+            type="text"
+            id="primary-phone"
+            {...register("phoneNumbers.0", {
+              required: {
+                value: true,
+                message: "Primary phone number is required",
+              },
+            })}
+          ></input>
+
+          <p className="error">{errors.phoneNumbers?.[0]?.message}</p>
+        </div>
+
+        <div className="form-control">
+          <label htmlFor="secondary-phone">Secondary phone number</label>
+          <input
+            type="text"
+            id="secondary-phone"
+            {...register("phoneNumbers.1", {
+              required: {
+                value: true,
+                message: "Secondary phone number is required",
+              },
+            })}
+          ></input>
+
+          <p className="error">{errors.phoneNumbers?.[1]?.message}</p>
         </div>
 
         <button type="submit">Submit</button>
